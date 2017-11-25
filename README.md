@@ -62,13 +62,13 @@ Data is transmitted in a string format with character counts as follows:
 |Accuracy  |-|4|-|-|1|5|
 |Velocity  |-|3|-|-|1|4|
 |Bearing   |-|3|-|-|1|4|
-|Timestamp |-|4|-|9|1|14|
+|Timestamp |-|11|-|10|1|22|
 
-The delimiter is a space (U+0020). Commas can be problematic when they conflict with those used as decimals in French-language formats, and other delimiters make strings look baroque and annoying.
+The delimiter is a semicolon; commas can cause problems with French-language systems which use commas as decimals.
 
-A full position is up to 53 characters. This means a single SMS message can transmit 2 positions, though this is only relevant when transmitting backlogged positions after periods without a working connection.
+A full position is up to 65 characters (less if one of the fields doesn't require all of the available space, for example, the latitude maybe just north of the equator, therefore eliminating the need for the +/- sign and one of the two pre-decimal digits). This means a single SMS message - containing a maximum of 140 characters - can always transmit 2 positions, though this is only relevant when transmitting backlogged positions after periods without a working connection.
 
-Example position: ```-12.43245 123.82732 112 11 23 249  
+Example position: ```-12.43245;123.82732;112;11;23;2017-11-20 15:34:22.1```.
 
 # Dashboard
 

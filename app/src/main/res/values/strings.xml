@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">BusBabe</string>
+    <string name="action_settings">Settings</string>
+    <string name="gps_time_interval">GPS Time Interval:</string>
+    <string name="minutes_label">Minutes</string>
+    <string name="minutes_default_value">0</string>
+    <string name="seconds_label">Seconds</string>
+    <string name="seconds_default_value">30</string>
+    <string name="phone_number_label">Phone number</string>
+    <string name="phone_number_default_value">+255623882188</string>
+</resources>

@@ -19,6 +19,7 @@
 
     <style name="Header1">
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Title</item>
+        <item name="android:paddingTop">24dp</item>
     </style>
 
 </resources>

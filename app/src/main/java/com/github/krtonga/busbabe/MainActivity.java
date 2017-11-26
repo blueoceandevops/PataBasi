@@ -143,6 +143,11 @@ public class MainActivity extends AppCompatActivity implements LocationTracker.L
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            if (BuildConfig.FLAVOR.equals("babe")) {
+                Log.d(TAG, "onOptionsItemSelected: Flavor = babe.");
+                Intent intent = new Intent(this, MapActivity.class);
+                startActivity(intent);
+            }
             return true;
         }
 

@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.github.krtonga.busbabe.MapActivity">
+    <item
+        android:id="@+id/action_open_tracker"
+        android:orderInCategory="100"
+        android:title="@string/action_open_tracker"
+        app:showAsAction="ifRoom" />
+</menu>

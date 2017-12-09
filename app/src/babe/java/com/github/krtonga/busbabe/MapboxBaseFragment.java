@@ -156,13 +156,17 @@ public abstract class MapboxBaseFragment extends DialogFragment implements OnMap
     }
 
     protected void addMarker(LatLng location, Integer titleResId, Integer snippetResId) {
+        addMarker(location, getString(titleResId), getString(snippetResId));
+    }
+
+    protected void addMarker(LatLng location, String title, String snippet) {
         if (location == null) {
             return;
         }
         mMarker = new MarkerOptions()
                 .position(location)
-                .title(getString(titleResId))
-                .snippet(getString(snippetResId));
+                .title(title)
+                .snippet(snippet);
         mMapboxMap.addMarker(mMarker);
     }
 

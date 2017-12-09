@@ -8,6 +8,10 @@ import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.util.Log;
 
+import com.github.krtonga.busbabe.Utils;
+
+import java.text.ParseException;
+
 /**
  * This catches SMS messages that are sent to the app.
  */
@@ -20,12 +24,26 @@ public class SmsReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Log.d(TAG, "onReceive: ");
         Bundle data = intent.getExtras();
+        if (data == null) {
+            return;
+        }
 
         Object[] msgs = (Object[]) data.get("pdus");
-        for (int i = 0; i < msgs.length; i++) {
-            SmsMessage message = SmsMessage.createFromPdu((byte[])msgs[i]);
-            String sender = message.getDisplayOriginatingAddress();
-            Log.d(TAG, "onReceive: "+sender+","+message.getDisplayMessageBody());
+        if (msgs == null) {
+            return;
+        }
+        for (Object msg : msgs) {
+            SmsMessage sms = SmsMessage.createFromPdu((byte[]) msg);
+            String sender = sms.getDisplayOriginatingAddress();
+            Log.d(TAG, "onReceive: " + sender + "," + sms.getDisplayMessageBody());
+            String message = sms.getDisplayMessageBody();
+            if (Utils.isFromABitch(message) && mListener != null) {
+                try {
+                    mListener.smsParsed(Utils.readSms(message), sender);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -34,6 +52,6 @@ public class SmsReceiver extends BroadcastReceiver {
     }
 
     public interface SmsListener {
-        void smsParsed(Location location);
+        void smsParsed(Location location, String phoneNumber);
     }
 }

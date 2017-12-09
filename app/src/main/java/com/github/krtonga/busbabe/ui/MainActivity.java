@@ -1,4 +1,4 @@
-package com.github.krtonga.busbabe;
+package com.github.krtonga.busbabe.ui;
 
 import android.Manifest;
 import android.content.Intent;
@@ -21,6 +21,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.krtonga.busbabe.BuildConfig;
+import com.github.krtonga.busbabe.MapActivity;
+import com.github.krtonga.busbabe.R;
 import com.github.krtonga.busbabe.location.LocationTracker;
 
 public class MainActivity extends AppCompatActivity implements LocationTracker.LocationListener {

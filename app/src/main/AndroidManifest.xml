@@ -21,7 +21,7 @@
         <service android:name=".location.LocationService" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:label="@string/send_location_updates_activity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

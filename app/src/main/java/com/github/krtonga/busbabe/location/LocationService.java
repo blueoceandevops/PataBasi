@@ -18,6 +18,7 @@ import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.util.Log;
 
+import com.github.krtonga.busbabe.Utils;
 import com.github.krtonga.busbabe.events.EventHandler;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -208,7 +209,7 @@ public class LocationService extends Service implements
         Log.d(TAG, "sendSms: "+mPhoneNumber);
         smsManager.sendTextMessage(mPhoneNumber,
                 null,
-                location.toString(),
+                Utils.createSms(location),
                 null,
                 null);
     }

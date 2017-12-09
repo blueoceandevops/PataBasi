@@ -54,21 +54,23 @@ When there is no server back end, as in a deployment tracking NGO vehicles in an
 **Position Format**
 Data is transmitted in a string format with character counts as follows:
 
-| Field | sign(+/-)| pre-decimal | decimal | post-decimal| delimiter | chars |
-|---| ---: | ---: | ---: | ---: | ---: | ---: |
-|Lat       |1|2|1|5|1|10|
-|Long      |-|3|1|5|1|9|
-|Elevation |1|3|-|-|1|5|
-|Accuracy  |-|4|-|-|1|5|
-|Velocity  |-|3|-|-|1|4|
-|Bearing   |-|3|-|-|1|4|
-|Timestamp |-|11|-|10|1|22|
+| Field | sign(+/-)| pre-decimal | decimal | post-decimal| delimiter | chars | example |
+|---| ---: | ---: | ---: | ---: | ---: | ---: |---|
+|Lat       |1|2|1|5|1|10|-12.43245|
+|Long      |-|3|1|5|1|9|123.82732|
+|Elevation |1|3|-|-|1|5|112|
+|Accuracy  |-|4|-|-|1|5|11|
+|Velocity  |-|3|-|-|1|4|23|
+|Bearing   |-|3|-|-|1|4|359|
+|Timestamp |-|10|-|-|1|11|010704120856|
 
 The delimiter is a semicolon; commas can cause problems with French-language systems which use commas as decimals.
 
+The date is a Java SimpleDateFormat string; the example above, 010704120856, stands for 2001-07-04 12:08:56.
+
 A full position is up to 64 characters (less if one of the fields doesn't require all of the available space, for example, the latitude may be just north of the equator, therefore eliminating the need for the +/- sign and one of the two pre-decimal digits). This means a single SMS message - containing a maximum of 140 characters - can always transmit 2 positions, though this is only relevant when transmitting backlogged positions after periods without a working connection.
 
-Example position: ```-12.43245;123.82732;112;11;23;2017-11-20 15:34:22.1```.
+Example position: ```-12.43245;123.82732;112;11;23;359;010704120856```.
 
 # Dashboard
 

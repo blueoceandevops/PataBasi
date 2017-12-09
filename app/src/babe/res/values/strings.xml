@@ -1,6 +1,8 @@
 <resources>
-    <string name="send_location_updates_activity">BusBitch - Send Updates.</string>
-    <string name="title_activity_map">BusBabe - Where Are They?</string>
+    <string name="app_name">BusBitch</string>
+
+    <string name="send_location_updates_activity">Send Updates</string>
+    <string name="title_activity_map">See Fleet</string>
     <string name="action_open_map">Map</string>
     <string name="action_open_tracker">Tracker</string>
 

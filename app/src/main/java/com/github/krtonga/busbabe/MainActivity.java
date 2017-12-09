@@ -107,6 +107,10 @@ public class MainActivity extends AppCompatActivity implements LocationTracker.L
 
         mFab = findViewById(R.id.fab);
         mFab.setOnClickListener(mFabClickListener);
+
+        // TODO Where does this go?
+        // Necessary for finding correct SMS provider on dual SIM phones
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, 0);
     }
 
     private boolean isSmsPermissionGranted() {

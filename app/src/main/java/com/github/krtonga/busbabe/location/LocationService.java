@@ -14,6 +14,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.telephony.SmsManager;
+import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
 import android.util.Log;
 
 import com.github.krtonga.busbabe.events.EventHandler;
@@ -29,6 +31,8 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStates;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
+
+import java.util.List;
 
 /**
  * This sends location updates at the given interval.
@@ -187,8 +191,21 @@ public class LocationService extends Service implements
     }
 
     private void sendSms(Location location) {
-        Log.d(TAG, "sendSms: "+mPhoneNumber);
         SmsManager smsManager = SmsManager.getDefault();
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP_MR1) {
+            int subscriptionId = SmsManager.getDefaultSmsSubscriptionId();
+
+            // On dual SIM phones, default SIM is null
+            if (subscriptionId == -1) {
+                SubscriptionManager subscriptionManager = SubscriptionManager.from(getApplicationContext());
+                List<SubscriptionInfo> subscriptionInfoList = subscriptionManager.getActiveSubscriptionInfoList();
+                subscriptionId = subscriptionInfoList.get(0).getSubscriptionId();
+            }
+            smsManager = SmsManager.getSmsManagerForSubscriptionId(subscriptionId);
+            Log.d(TAG,"DEFAULT subscriptionId:"+subscriptionId);
+        }
+
+        Log.d(TAG, "sendSms: "+mPhoneNumber);
         smsManager.sendTextMessage(mPhoneNumber,
                 null,
                 location.toString(),
